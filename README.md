@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ₿ BTC ETF Flow Dashboard
+
+A clean, real-time Bitcoin spot ETF daily net flow tracker built with **Next.js 14**, **TypeScript**, **Tailwind CSS**, and **Recharts**.
+
+🔗 **Live Demo:** [btc-etf-dashboard.vercel.app](https://btc-etf-dashboard.vercel.app)
+
+---
+
+## Features
+
+- 📊 **Daily flow chart** — stacked bar chart with total line overlay (last 30 days)
+- 📋 **ETF breakdown table** — color-coded inflows (green) and outflows (red) per fund
+- 📅 **Weekly & Monthly aggregated views** — tabs to switch timeframes
+- 🔢 **Summary cards** — today's flow, weekly total, 30-day net flow
+- 🌑 **Dark-mode-first UI** — built for readability on dark backgrounds
+- 📱 **Responsive** — mobile-friendly layout
+
+## ETFs Tracked
+
+| Ticker | Fund |
+|--------|------|
+| IBIT | iShares Bitcoin Trust (BlackRock) |
+| FBTC | Fidelity Wise Origin Bitcoin Fund |
+| GBTC | Grayscale Bitcoin Trust |
+| ARKB | ARK 21Shares Bitcoin ETF |
+| BITB | Bitwise Bitcoin ETF |
+| HODL | VanEck Bitcoin Trust |
+| BRRR | Valkyrie Bitcoin Fund |
+| EZBC | Franklin Bitcoin ETF |
+| BTCO | Invesco Galaxy Bitcoin ETF |
+| DEFI | Hashdex Bitcoin ETF |
+
+## Data Source
+
+The app attempts to scrape live data from **[Farside Investors](https://farside.co.uk/btc/)** via a server-side Next.js API route (avoids CORS issues). If the live fetch fails (e.g., Cloudflare protection), it automatically falls back to **realistic mock data** clearly labeled in the UI.
+
+The API route lives at `/api/flows` and caches responses for 1 hour.
+
+## Tech Stack
+
+- **Framework:** Next.js 14 App Router (TypeScript)
+- **Styling:** Tailwind CSS
+- **Charts:** Recharts
+- **Parsing:** node-html-parser (for Farside scraping)
+- **Deployment:** Vercel
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+git clone https://github.com/enndee-dev22/btc-etf-dashboard
+cd btc-etf-dashboard
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Deployed on Vercel with zero configuration. Any push to `main` auto-deploys.
 
-## Learn More
+```bash
+vercel --prod
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Caveats
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Live data scraping from Farside Investors may be blocked by Cloudflare bot protection
+- When live data is unavailable, the dashboard shows clearly-labeled simulated data based on realistic historical ETF flow patterns
+- All values are in USD millions (M)
+- Not financial advice
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
